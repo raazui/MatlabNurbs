@@ -3,7 +3,7 @@ clc;clear all;close all;
 % Description: Testscript for Basis function.
 % 1-D Test: B-spline curve
 %% Initialize Test Variables:
-ppoint = 0:0.02:1; % Contains 6 values.
+ppoint = 0:0.2:1; % Contains 6 values.
 ptsx = [0 2 4 5];
 ptsy = [1 4 5 3];
 pts = [ptsx' ptsy']; % 4 points total
@@ -18,7 +18,7 @@ if numel(knot)~=r+1
 end
 % Find the Basis Function:
 if flag == 0
-    N = Basis(ppoint(2),knot,order,2)
+    N = Basis(ppoint(3),knot,order,2)
 end
 %% Generate the Nurbs Curve:
 % w = double(1/4*ones(1,4));

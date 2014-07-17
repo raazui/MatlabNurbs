@@ -9,7 +9,7 @@
 % Outputs:
 % N               - Matrix with all spline values calculated
 % *Note: Order refers to 0...(k/l) wheras degree refers to 1...(k/l)-1.
-function N = Basis(ppoint,knot,order,index)
+function N = Basis(ppoint,knot,order,maxindex)
 % Initailize empty matrix:
 % Fill matrix with all first order splines:
 for i=1:numel(knot)-1
@@ -21,21 +21,23 @@ for i=1:numel(knot)-1
 end
 N
 % Fill all higher order splines:
-for i=1:index-1
+counter = 0;
+for i=1:numel(knot)-order
+    counter = counter + 1
     for k=2:order
-        temp1 = ( ppoint - knot(i) );
-        temp2 = ( knot(i+k-1) );
+        temp1 = ( ppoint - knot(i) ) * N(i,k-1)
+        temp2 = ( knot(i+k-1) - knot(i))
         if temp1 == 0 && temp2 == 0;
             temp3 = 0;
         else
-            temp3 = ( temp1 / temp2 ) * N(i,k-1);
+            temp3 = temp1 / temp2 
         end
-        temp4 = ( knot(i+k) - ppoint ); 
-        temp5 = ( knot(i+k)- knot(i+1) );
+        temp4 = ( knot(i+k) - ppoint ) * N(i+1,k-1)
+        temp5 = ( knot(i+k)- knot(i+1) )
         if temp4 == 0 && temp5 == 0
             temp6 = 0;
         else
-            temp6 = ( temp4 / temp5 ) * N(i+1,k-1);
+            temp6 = temp4 / temp5 
         end
         N(i,k) = double(temp3) + double(temp6);
     end
