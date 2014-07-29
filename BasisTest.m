@@ -21,16 +21,16 @@ if flag == 0
     N = Basis(ppoint(2),knot,order,2)
 end
 %% Generate the Nurbs Curve:
-% w = double(1/4*ones(1,4));
-% for x=1:numel(ppoint)
-%     point = ppoint(x);
-%     temp = Basis(point,knot,order,maxindex)';
-%     Cu(x) = sum(w .* ptsx .* temp );
-% end
-% %% Plot the Curve:
-% figure(1),
-% hold on;
-% plot(ptsx,ptsy,'ro--');
-% title('Nurbs Curve');
-% plot(linspace(0,5,numel(ppoint)),Cu,'bx');
-% hold off;
+w = double(1/4*ones(1,4));
+for x=1:numel(ppoint)
+    point = ppoint(x);
+    temp = Basis(point,knot,order,maxindex)';
+    Cu(x) = sum(w .* ptsx .* temp );
+end
+%% Plot the Curve:
+figure(1),
+hold on;
+plot(ptsx,ptsy,'ro--');
+title('Nurbs Curve');
+plot(linspace(0,5,numel(ppoint)),Cu,'bx');
+hold off;

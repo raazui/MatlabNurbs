@@ -24,7 +24,7 @@ N
 for i=1:index-1
     for k=2:order
         temp1 = ( ppoint - knot(i) );
-        temp2 = ( knot(i+k-1) );
+        temp2 = ( knot(i+k-1) - knot(i) );
         if temp1 == 0 && temp2 == 0;
             temp3 = 0;
         else
